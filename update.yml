@@ -1,0 +1,17 @@
+---
+- hosts: all
+  become: yes
+  vars_prompt:
+  - name: myusername
+    prompt: "Enter Username "
+    private: no
+
+  - name: mypassword
+    prompt: "Enter Password ( Generate one using grub-crypt --sha-512) "
+    private: no
+  tasks:
+  - name: Change Password
+    user:
+      name: "{{ myusername }}"
+      password: "{{ mypassword }}"
+      update_password: always
